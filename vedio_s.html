@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>北邮体育馆</title>
+    <style>
+        body {
+            background-color: #f8f8f8;
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .t0 {
+            display: flex;
+            height: 60px;
+            padding: 10px;
+            font-size: 18px;
+            position: relative;
+            background-color: #f8f8f8;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* 占满整个视口 */
+            position: relative;
+            flex-wrap: wrap;
+        }
+
+        /* 大圆样式 */
+        .big-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            position: relative; /* 设置为相对定位，为小圆的定位提供参考 */
+            top: -160px;
+        }
+
+        /* 小圆样式 */
+        .small-circle1,
+        .small-circle2,
+        .small-circle3 {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -250%); /* 初始位置：小圆心在大圆的顶部边缘 */
+            transform-origin: 50% 250%; /* 以大圆中心为旋转原点 */
+        }
+
+        .small-circle1 {
+            background-color: #95c365;
+            animation: spin1 3s linear infinite; /* 动画：旋转 */
+        }
+
+        .small-circle2 {
+            background-color: #95c365;
+            animation: spin2 3s linear infinite; /* 动画：旋转 */
+        }
+
+        .small-circle3 {
+            background-color: #efee64;
+            animation: spin3 3s linear infinite; /* 动画：旋转 */
+        }
+
+        /* 定义旋转动画 */
+        @keyframes spin1 {
+            from {
+                transform: translate(-50%, -400%) rotate(0deg);
+            }
+            to {
+                transform: translate(-50%, -400%) rotate(360deg);
+            }
+        }
+
+        @keyframes spin2 {
+            from {
+                transform: translate(-50%, -400%) rotate(-120deg);
+            }
+            to {
+                transform: translate(-50%, -400%) rotate(240deg);
+            }
+        }
+
+        @keyframes spin3 {
+            from {
+                transform: translate(-50%, -400%) rotate(-240deg);
+            }
+            to {
+                transform: translate(-50%, -400%) rotate(120deg);
+            }
+        }
+
+        .number {
+            font-size: 48px;
+            text-align: center;
+            color: rgba(102, 102, 102, 0.835);
+            font-size: 30px;
+            margin-top: -11px;
+        }
+
+        .success-message {
+            color: rgba(102, 102, 102, 0.835);
+            font-size: 23px;
+            font-weight: 400;
+            position: absolute;
+            top: 270px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="t0">
+        <!-- 这个空的 <view> 是为了模仿原始小程序中的布局，实际在网页中可以省略 -->
+    </div>
+
+    <div class="container">
+        <div class="big-circle">
+            <div class="number" id="number">1</div>
+            <div class="small-circle1"></div>
+            <div class="small-circle2"></div>
+            <div class="small-circle3"></div>
+        </div>
+        <div class="success-message">该 时 段 签 到 成 功</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 第一个定时器：在0.8秒后将 number 变为0
+            setTimeout(() => {
+                document.getElementById('number').innerText = '0'; // 将 number 设置为 0
+            }, 800);  // 800ms = 0.8秒
+
+            // 第二个定时器：在2秒后跳转并关闭当前页面
+            setTimeout(() => {
+                window.location.href = "https://yty93669.github.io/bygym/target_s"; // 跳转到目标页面
+            }, 2000);  // 2000ms = 2秒
+        });
+    </script>
+
+</body>
+</html>
