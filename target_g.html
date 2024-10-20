@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>北邮体育馆</title>
+    <style>
+        body {
+            background-color: #f8f8f8;
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .t0 {
+            display: flex;
+            height: 60px;
+            padding: 10px;
+            font-size: 18px;
+            position: relative;
+        }
+
+        .t0 .close-icon {
+            font-size: 30px;
+            font-weight: 300;
+            position: absolute;
+            bottom: 10px;
+        }
+
+        .t0 .title {
+            font-size: 16px;
+            font-weight: 600;
+            position: absolute;
+            bottom: 15px;
+            right: 150px;
+        }
+
+        .top {
+            height: 20px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: white;
+            line-height: 20px;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .top img {
+            height: 16px;
+            width: 16px;
+        }
+
+        .top .reservation-title {
+            position: absolute;
+            right: 140px;
+            font-weight: 600;
+        }
+
+        .v1 {
+            margin: 8px;
+            background-color: white;
+            height: 180px;
+            border-radius: 4%;
+            padding: 20px;
+            color: #a1a1a1;
+        }
+
+        .v11 {
+            display: flex;
+            border-bottom: 1px solid #bdbbbb;
+            justify-content: space-between;
+            line-height: 50px;
+            margin-bottom: 15px;
+        }
+
+        .button1 {
+            background-color: #fa896d;
+            color: white;
+            font-size: 18px;
+            text-align: center;
+            margin-top: 20px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 4%;
+            cursor: pointer;
+        }
+
+        .button1 a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="t0">
+        <div class="close-icon">×</div>
+        <div class="title">北邮体育馆</div>
+    </div>
+
+    <div class="top">
+        <img src="https://yty93669.github.io/bygym/list/返回.png" alt="返回">
+        <div class="reservation-title">我的今日预约</div>
+    </div>
+
+    <div class="v1">
+        <div class="v11">
+            <div style="font-size: 20px;">健身房</div>
+            <div style="font-size: 15px;">#2227216</div>
+        </div>
+        <div style="font-size: 15px;">预约时间：<span id="currentDateWithYear"></span> <span id="currentHour1"></span>:00-<span id="currentHour2"></span>:00</div>
+        <div style="font-size: 15px; margin-top: 5px;">签到时间：<span id="currentDateWithoutYear"></span> <span id="currentTime"></span></div>
+        <div class="button1">
+            <a href="https://yty93669.github.io/bygym/video">已签到</a>
+        </div>
+    </div>
+
+    <script>
+        function formatNumber(n) {
+            return n < 10 ? '0' + n : n;
+        }
+
+        function getCurrentTime() {
+            const date = new Date();
+            const hours = date.getHours();
+            const minutes = date.getMinutes();
+            
+            let hour1, hour2;
+
+            // 判断分钟数并设置 hour1 和 hour2
+            if (minutes < 30) {
+                hour1 = hours;
+                hour2 = (hours + 1) % 24; // 防止超过24小时制
+            } else {
+                hour1 = (hours + 1) % 24;
+                hour2 = (hours + 2) % 24; // 防止超过24小时制
+            }
+
+            // 格式化日期
+            const currentDateWithYear = `${date.getFullYear()}-${formatNumber(date.getMonth() + 1)}-${formatNumber(date.getDate())}`;
+            const currentDateWithoutYear = `${formatNumber(date.getMonth() + 1)}-${formatNumber(date.getDate())}`;
+            const currentTime = `${formatNumber(hours)}:${formatNumber(minutes)}`;
+
+            // 将数据插入到页面中
+            document.getElementById('currentDateWithYear').innerText = currentDateWithYear;
+            document.getElementById('currentDateWithoutYear').innerText = currentDateWithoutYear;
+            document.getElementById('currentHour1').innerText = hour1;
+            document.getElementById('currentHour2').innerText = hour2;
+            document.getElementById('currentTime').innerText = currentTime;
+        }
+
+        // 页面加载完成时，获取并显示当前时间
+        window.onload = function() {
+            getCurrentTime();
+        }
+    </script>
+
+</body>
+</html>
