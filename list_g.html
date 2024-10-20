@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>预约页面</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+        }
+
+        .t0 {
+            display: flex;
+            height: 60px;
+            padding: 10px;
+            font-size: 18px;
+            position: relative;
+        }
+
+        .t0 .close {
+            font-size: 30px;
+            font-weight: 300;
+            position: absolute;
+            bottom: 10px;
+        }
+
+        .t0 .title {
+            font-size: 16px;
+            font-weight: 600;
+            position: absolute;
+            bottom: 15px;
+            right: 150px;
+        }
+
+        .top {
+            height: 20px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: white;
+            line-height: 20px;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .top img {
+            height: 16px;
+            width: 16px;
+        }
+
+        .top .reservation {
+            position: absolute;
+            right: 140px;
+            font-weight: 600;
+        }
+
+        .v1 {
+            margin: 8px;
+            background-color: white;
+            height: 160px;
+            border-radius: 4%;
+            padding: 20px;
+        }
+
+        .v11 {
+            display: flex;
+            border-bottom: 1px solid #bdbbbb;
+            justify-content: space-between;
+            line-height: 50px;
+            margin-bottom: 15px;
+        }
+
+        .button1 {
+            background-color: #da5735;
+            color: white;
+            font-size: 18px;
+            text-align: center;
+            margin-top: 20px;
+            height: 40px;
+            align-self: center;
+            line-height: 40px;
+            border-radius: 4%;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="t0">
+        <div class="close">×</div>
+        <div class="title">北邮体育馆</div>
+    </div>
+
+    <div class="top">
+        <img src="返回.png" alt="返回">
+        <div class="reservation">我的今日预约</div>
+    </div>
+
+    <div class="v1">
+        <div class="v11">
+            <div style="font-size: 20px;">健身房</div>
+            <div style="font-size: 15px;">#2227216</div>
+        </div>
+        <div style="font-size: 15px;">预约时间：<span id="currentDate"></span> <span id="currentHour1"></span>:00-<span id="currentHour2"></span>:00</div>
+
+        <a href="/pages/video_g/video_g" class="button1">签到</a>
+    </div>
+
+    <script>
+        function formatNumber(n) {
+            return n < 10 ? '0' + n : n;
+        }
+
+        function getCurrentTime() {
+            const date = new Date();
+            const hours = date.getHours();
+            const minutes = date.getMinutes();
+            
+            let hour1, hour2;
+
+            if (minutes < 30) {
+                hour1 = hours;
+                hour2 = (hours + 1) % 24; // 防止超过24小时制
+            } else {
+                hour1 = (hours + 1) % 24;
+                hour2 = (hours + 2) % 24;
+            }
+
+            const currentDate = `${date.getFullYear()}-${formatNumber(date.getMonth() + 1)}-${formatNumber(date.getDate())}`;
+            const currentTime = `${formatNumber(hours)}:${formatNumber(minutes)}`;
+
+            document.getElementById('currentDate').innerText = currentDate;
+            document.getElementById('currentHour1').innerText = formatNumber(hour1);
+            document.getElementById('currentHour2').innerText = formatNumber(hour2);
+        }
+
+        window.onload = function() {
+            getCurrentTime();
+        }
+    </script>
+
+</body>
+</html>
