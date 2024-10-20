@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>北邮体育馆</title>
+    <style>
+        body {
+            background-color: #f8f8f8;
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .t0 {
+            display: flex;
+            height: 60px;
+            padding: 10px;
+            font-size: 18px;
+            position: relative;
+        }
+
+        .t0 .close-icon {
+            font-size: 30px;
+            font-weight: 300;
+            position: absolute;
+            bottom: 10px;
+        }
+
+        .t0 .title {
+            font-size: 16px;
+            font-weight: 800;
+            position: absolute;
+            bottom: 15px;
+            right: 150px;
+        }
+
+        .top {
+            height: 20px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: white;
+            line-height: 20px;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .top img {
+            height: 16px;
+            width: 16px;
+        }
+
+        .top .reservation-title {
+            position: absolute;
+            right: 140px;
+            font-weight: 800;
+        }
+
+        .v1 {
+            margin: 8px;
+            background-color: white;
+            height: 180px;
+            border-radius: 4%;
+            padding: 20px;
+            color: #a1a1a1;
+        }
+
+        .v11 {
+            display: flex;
+            border-bottom: 1px solid #bdbbbb;
+            justify-content: space-between;
+            line-height: 50px;
+            margin-bottom: 15px;
+        }
+
+        .button1 {
+            background-color: #fa896d;
+            color: white;
+            font-size: 18px;
+            text-align: center;
+            margin-top: 20px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 4%;
+            cursor: pointer;
+        }
+
+        .button1 a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="t0">
+        <div class="close-icon">×</div>
+        <div class="title">北邮体育馆</div>
+    </div>
+
+    <div class="top">
+        <img src="https://yty93669.oss-cn-beijing.aliyuncs.com/%E4%BD%93%E8%82%B2%E9%A6%86%E7%9B%AE%E5%BD%95/%E8%BF%94%E5%9B%9E.png" alt="返回">
+        <div class="reservation-title">我的今日预约</div>
+    </div>
+
+    <div class="v1">
+        <div class="v11">
+            <div style="font-size: 20px;">下午场</div>
+            <div style="font-size: 15px;">#2227216</div>
+        </div>
+        <div style="font-size: 15px;">预约时间：<span id="fullDate"></span> <span id="timePeriod"></span></div>
+        <div style="font-size: 15px; margin-top: 5px;">签到时间：<span id="shortDate"></span> <span id="currentTime"></span></div>
+        <div class="button1">
+            <a href="https://yty93669.github.io/bygym/video">已签到</a>
+        </div>
+    </div>
+
+    <script>
+        function formatNumber(n) {
+            return n < 10 ? '0' + n : n;
+        }
+
+        function getTimePeriod(date) {
+            let hours = date.getHours();
+            let minutes = date.getMinutes();
+            let currentMinutes = hours * 60 + minutes;
+
+            // 定义时间段
+            let periods = [
+                { start: 15 * 60, end: 16 * 60 + 30, label: '15:00-16:30' },
+                { start: 16 * 60 + 30, end: 18 * 60, label: '16:30-18:00' },
+                { start: 18 * 60, end: 19 * 60 + 30, label: '18:00-19:30' },
+                { start: 19 * 60 + 30, end: 21 * 60, label: '19:30-21:00' }
+            ];
+
+            for (let i = 0; i < periods.length; i++) {
+                if (currentMinutes >= periods[i].start && currentMinutes < periods[i].end) {
+                    return periods[i].label;
+                }
+            }
+
+            return '';
+        }
+
+        function updateTime() {
+            let now = new Date();
+
+            // 格式化日期和时间
+            let fullDate = `${now.getFullYear()}-${formatNumber(now.getMonth() + 1)}-${formatNumber(now.getDate())}`;
+            let shortDate = `${formatNumber(now.getMonth() + 1)}-${formatNumber(now.getDate())}`;
+            let currentTime = `${formatNumber(now.getHours())}:${formatNumber(now.getMinutes())}`;
+            let timePeriod = getTimePeriod(now);
+
+            // 更新页面中的数据
+            document.getElementById('fullDate').innerText = fullDate;
+            document.getElementById('shortDate').innerText = shortDate;
+            document.getElementById('currentTime').innerText = currentTime;
+            document.getElementById('timePeriod').innerText = timePeriod;
+        }
+
+        // 页面加载时更新时间
+        window.onload = function() {
+            updateTime();
+        }
+    </script>
+
+</body>
+</html>
