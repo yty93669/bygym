@@ -101,8 +101,8 @@
     <script>
         // Check access permission before loading the rest of the page
         function checkAccessBeforeLoad() {
-            const PagePhoto = sessionStorage.getItem('PagePhoto');
-            if (PagePhoto !== 'true') {
+            const PageList = sessionStorage.getItem('PageList');
+            if (PageList !== 'true') {
                 alert('对不起，您没有权限访问页面');
                 // Stop loading and redirect or close the page
                 window.location.href = 'error_page.html';  // 这里可以是一个错误提示页面或登录页面
