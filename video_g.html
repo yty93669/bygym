@@ -106,8 +106,10 @@
                 alert('对不起，您没有权限访问页面');
                 // Stop loading and redirect or close the page
                 window.location.href = 'error_page.html';  // 这里可以是一个错误提示页面或登录页面
-            }else{
+            } else {
+                // If the PageList is true, allow access and set PageVideo flag
                 sessionStorage.setItem('PageVideo', 'true');
+            }
         }
 
         checkAccessBeforeLoad();  // Execute this before page continues to load
@@ -133,7 +135,7 @@
     <script>
         function formatNumber(n) {
             return n < 10 ? '0' + n : n;
-        };
+        }
 
         function getCurrentTime() {
             const date = new Date();
