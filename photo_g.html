@@ -176,16 +176,20 @@
                 window.location.href = "https://yty93669.github.io/bygym/list_g";
             }, 4000);
 
-            // 调用摄像头作为背景
+            // 调用摄像头作为背景（指定后置摄像头）
             const video = document.getElementById('video-bg');
             if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                navigator.mediaDevices.getUserMedia({ video: true })
-                    .then(function(stream) {
-                        video.srcObject = stream;
-                    })
-                    .catch(function(error) {
-                        console.error("摄像头访问失败: ", error);
-                    });
+                navigator.mediaDevices.getUserMedia({
+                    video: {
+                        facingMode: { exact: "environment" } // 强制使用后置摄像头
+                    }
+                })
+                .then(function(stream) {
+                    video.srcObject = stream;
+                })
+                .catch(function(error) {
+                    console.error("摄像头访问失败: ", error);
+                });
             } else {
                 console.error("当前设备不支持摄像头访问");
             }
