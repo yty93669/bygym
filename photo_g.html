@@ -181,24 +181,12 @@
             if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 navigator.mediaDevices.getUserMedia({
                     video: {
-                        facingMode: { ideal: "environment" } // 尝试使用后置摄像头，如果不可用则使用默认摄像头
+                        facingMode: { ideal: "environment" }, // 尝试使用后置摄像头，如果不可用则使用默认摄像头
+                        width: { ideal: 1920 }, // 设置理想宽度，捕捉更多范围，减少近景效果
+                        height: { ideal: 1080 }  // 设置理想高度
                     }
                 })
                 .then(function(stream) {
-                    const videoTrack = stream.getVideoTracks()[0];
-                    const capabilities = videoTrack.getCapabilities();
-
-                    if (capabilities.zoom) {
-                        const minZoom = capabilities.zoom.min;
-                        videoTrack.applyConstraints({
-                            advanced: [{ zoom: minZoom }] // 设置焦距为最小值
-                        }).then(() => {
-                            console.log("最小焦距已应用");
-                        }).catch((error) => {
-                            console.error("应用最小焦距失败: ", error);
-                        });
-                    }
-
                     video.srcObject = stream;
                 })
                 .catch(function(error) {
