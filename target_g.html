@@ -147,7 +147,7 @@
         // 页面加载完成时，获取并显示当前时间
         window.onload = function() {
             getCurrentTime();
-
+};
             function checkHTML() {
             // Check if Page A has been visited
             const PageVideo = sessionStorage.getItem('PageVideo');
@@ -155,7 +155,6 @@
                 alert('对不起，您没有权限访问页面');
                 document.body.style.display = 'none';
             } 
-        };
         }
     </script>
 
