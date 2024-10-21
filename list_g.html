@@ -99,7 +99,7 @@
         }
     </style>
 </head>
-<body>
+<body onload="chetHTML()">
 
     <div class="top">
        
@@ -121,7 +121,19 @@
     <script>
         function formatNumber(n) {
             return n < 10 ? '0' + n : n;
-        }
+        };
+
+        function chetHTML() {
+            // Check if Page A has been visited
+            const PagePhoto = sessionStorage.getItem('PagePhoto');
+            if (PagePhoto !== 'true') {
+                alert('对不起，您没有权限访问页面');
+                document.body.style.display = 'none';
+            } else {
+                // Set a flag in sessionStorage indicating that Page B has been accessed
+                sessionStorage.setItem('PageList', 'true');
+            }
+        };
 
         function getCurrentTime() {
             const date = new Date();
