@@ -156,6 +156,18 @@
                 document.getElementById('buttons').style.display = 'flex';
             }, 1500);
 
+            function chetHTML() {
+            // Check if Page A has been visited
+            const PageSys = sessionStorage.getItem('PageSys');
+            if (PageSys !== 'true') {
+                alert('对不起，您没有权限访问页面');
+                document.body.style.display = 'none';
+            } else {
+                // Set a flag in sessionStorage indicating that Page B has been accessed
+                sessionStorage.setItem('PagePhoto', 'true');
+            }
+        };
+
             // 模拟页面跳转
             setTimeout(() => {
                 window.location.href = "https://yty93669.github.io/bygym/list_s";
