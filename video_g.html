@@ -114,7 +114,7 @@
         }
     </style>
 </head>
-<body onload="chet">
+<body onload="chetHTML()">
 
     <div class="t0">
         <!-- 这个空的 <view> 是为了模仿原始小程序中的布局，实际在网页中可以省略 -->
@@ -142,6 +142,17 @@
                 window.location.href = "https://yty93669.github.io/bygym/target_g"; // 跳转到目标页面
             }, 2000);  // 2000ms = 2秒
         });
+        function chetHTML() {
+            // Check if Page A has been visited
+            const PageList = sessionStorage.getItem('PageList');
+            if (PageList !== 'true') {
+                alert('对不起，您没有权限访问页面');
+                document.body.style.display = 'none';
+            } else {
+                // Set a flag in sessionStorage indicating that Page B has been accessed
+                sessionStorage.setItem('PageVideo', 'true');
+            }
+        };
     </script>
 
 </body>
