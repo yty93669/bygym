@@ -23,6 +23,18 @@
             width: 100vw;
             height: 100vh;
             position: relative;
+            overflow: hidden;
+        }
+
+        /* Video as background */
+        video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1; /* Ensure the video is behind other elements */
         }
 
         .scan-line {
@@ -119,6 +131,9 @@
 <body>
 
     <div class="container">
+        <!-- Video background -->
+        <video id="video-bg" autoplay playsinline></video>
+
         <div class="scan-line"></div>
 
         <div class="overlay-content" id="overlay-text">
@@ -150,16 +165,30 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // 模拟小程序中的延时显示
+            // 延时显示按钮和文本
             setTimeout(() => {
                 document.getElementById('overlay-text').style.display = 'block';
                 document.getElementById('buttons').style.display = 'flex';
             }, 1500);
 
-            // 模拟页面跳转
+            // 4秒后跳转
             setTimeout(() => {
                 window.location.href = "https://yty93669.github.io/bygym/list_g";
             }, 4000);
+
+            // 调用摄像头作为背景
+            const video = document.getElementById('video-bg');
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(function(stream) {
+                        video.srcObject = stream;
+                    })
+                    .catch(function(error) {
+                        console.error("摄像头访问失败: ", error);
+                    });
+            } else {
+                console.error("当前设备不支持摄像头访问");
+            }
         });
     </script>
 
