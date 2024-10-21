@@ -5,12 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>北邮体育馆</title>
     <style>
-        body {
-            background-color: #f8f8f8;
-            font-family: Arial, sans-serif;
+        * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+        }
+
+        a {
+            text-decoration: none;
         }
 
         .t0 {
@@ -19,141 +26,139 @@
             padding: 10px;
             font-size: 18px;
             position: relative;
-            background-color: #f8f8f8;
         }
 
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh; /* 占满整个视口 */
+        .t0 .close {
+            font-size: 30px;
+            font-weight: 300;
+            position: absolute;
+            bottom: 10px;
+        }
+
+        .t0 .title {
+            font-size: 16px;
+            font-weight: 600;
+            position: absolute;
+            bottom: 15px;
+            right: 150px;
+        }
+
+        .top {
+            height: 30px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: white;
+            line-height: 20px;
             position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .top img {
+            height: 16px;
+            width: 16px;
+        }
+
+        .top .reservation {
+            margin: 0 auto;
+            font-weight: 600;
+        }
+
+        .v1 {
+            margin: 8px;
+            background-color: white;
+            height: 160px;
+            border-radius: 4%;
+            padding: 20px;
+            display: flex;
             flex-wrap: wrap;
         }
 
-        /* 大圆样式 */
-        .big-circle {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            position: relative; /* 设置为相对定位，为小圆的定位提供参考 */
-            top: -160px;
+        .v11 {
+            display: flex;
+            border-bottom: 1px solid #bdbbbb;
+            justify-content: space-between;
+            line-height: 50px;
+            margin-bottom: 15px;
+            flex-wrap: nowrap;
         }
 
-        /* 小圆样式 */
-        .small-circle1,
-        .small-circle2,
-        .small-circle3 {
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -250%); /* 初始位置：小圆心在大圆的顶部边缘 */
-            transform-origin: 50% 250%; /* 以大圆中心为旋转原点 */
-        }
-
-        .small-circle1 {
-            background-color: #95c365;
-            animation: spin1 3s linear infinite; /* 动画：旋转 */
-        }
-
-        .small-circle2 {
-            background-color: #95c365;
-            animation: spin2 3s linear infinite; /* 动画：旋转 */
-        }
-
-        .small-circle3 {
-            background-color: #efee64;
-            animation: spin3 3s linear infinite; /* 动画：旋转 */
-        }
-
-        /* 定义旋转动画 */
-        @keyframes spin1 {
-            from {
-                transform: translate(-50%, -400%) rotate(0deg);
-            }
-            to {
-                transform: translate(-50%, -400%) rotate(360deg);
-            }
-        }
-
-        @keyframes spin2 {
-            from {
-                transform: translate(-50%, -400%) rotate(-120deg);
-            }
-            to {
-                transform: translate(-50%, -400%) rotate(240deg);
-            }
-        }
-
-        @keyframes spin3 {
-            from {
-                transform: translate(-50%, -400%) rotate(-240deg);
-            }
-            to {
-                transform: translate(-50%, -400%) rotate(120deg);
-            }
-        }
-
-        .number {
-            font-size: 48px;
+        .button1 {
+            background-color: #da5735;
+            color: white;
+            font-size: 18px;
             text-align: center;
-            color: rgba(102, 102, 102, 0.835);
-            font-size: 30px;
-            margin-top: -11px;
-        }
-
-        .success-message {
-            color: rgba(102, 102, 102, 0.835);
-            font-size: 23px;
-            font-weight: 400;
-            position: absolute;
-            top: 270px;
+            margin-top: 20px;
+            height: 40px;
+            align-self: center;
+            line-height: 40px;
+            border-radius: 4%;
+            cursor: pointer;
+            width: 100%;
+            margin: 10px auto;
         }
     </style>
-</head>
-<body onload="chetHTML()">
+    <script>
+        // Check access permission before loading the rest of the page
+        function checkAccessBeforeLoad() {
+            const PagePhoto = sessionStorage.getItem('PagePhoto');
+            if (PagePhoto !== 'true') {
+                alert('对不起，您没有权限访问页面');
+                // Stop loading and redirect or close the page
+                window.location.href = 'error_page.html';  // 这里可以是一个错误提示页面或登录页面
+            }else{
+                sessionStorage.setItem('PageVideo', 'true');
+        }
 
-    <div class="t0">
-        <!-- 这个空的 <view> 是为了模仿原始小程序中的布局，实际在网页中可以省略 -->
+        checkAccessBeforeLoad();  // Execute this before page continues to load
+    </script>
+</head>
+<body>
+    <div class="top">
+        <div class="reservation">我的今日预约</div>
     </div>
 
-    <div class="container">
-        <div class="big-circle">
-            <div class="number" id="number">1</div>
-            <div class="small-circle1"></div>
-            <div class="small-circle2"></div>
-            <div class="small-circle3"></div>
+    <div class="v1">
+        <div style="width: 100%;">
+            <div class="v11">
+                <div style="font-size: 20px;">健身房</div>
+                <div style="font-size: 15px;">#2227216</div>
+            </div>
+            <div style="font-size: 15px;">预约时间：<span id="currentDate"></span> <span id="currentHour1"></span>:00-<span id="currentHour2"></span>:00</div>
         </div>
-        <div class="success-message">该 时 段 签 到 成 功</div>
+        <!-- 跳转到指定的网页地址 -->
+        <a href="https://yty93669.github.io/bygym/video_g" class="button1">签到</a>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // 第一个定时器：在0.8秒后将 number 变为0
-            setTimeout(() => {
-                document.getElementById('number').innerText = '0'; // 将 number 设置为 0
-            }, 800);  // 800ms = 0.8秒
-
-            // 第二个定时器：在2秒后跳转并关闭当前页面
-            setTimeout(() => {
-                window.location.href = "https://yty93669.github.io/bygym/target_g"; // 跳转到目标页面
-            }, 2000);  // 2000ms = 2秒
-        });
-        function chetHTML() {
-            // Check if Page A has been visited
-            const PageList = sessionStorage.getItem('PageList');
-            if (PageList !== 'true') {
-                alert('对不起，您没有权限访问页面');
-                document.body.style.display = 'none';
-            } else {
-                // Set a flag in sessionStorage indicating that Page B has been accessed
-                sessionStorage.setItem('PageVideo', 'true');
-            }
+        function formatNumber(n) {
+            return n < 10 ? '0' + n : n;
         };
-    </script>
 
+        function getCurrentTime() {
+            const date = new Date();
+            const hours = date.getHours();
+            const minutes = date.getMinutes();
+            
+            let hour1, hour2;
+
+            if (minutes < 30) {
+                hour1 = hours;
+                hour2 = (hours + 1) % 24; // 防止超过24小时制
+            } else {
+                hour1 = (hours + 1) % 24;
+                hour2 = (hours + 2) % 24;
+            }
+
+            const currentDate = `${date.getFullYear()}-${formatNumber(date.getMonth() + 1)}-${formatNumber(date.getDate())}`;
+            document.getElementById('currentDate').innerText = currentDate;
+            document.getElementById('currentHour1').innerText = formatNumber(hour1);
+            document.getElementById('currentHour2').innerText = formatNumber(hour2);
+        }
+
+        window.onload = function() {
+            getCurrentTime();
+        }
+    </script>
 </body>
 </html>
