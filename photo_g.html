@@ -33,7 +33,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit:contain ;
+            object-fit: contain; /* 修改为 contain 确保视频完整显示，不会放大太多 */
             z-index: -1; /* Ensure the video is behind other elements */
         }
 
@@ -47,10 +47,10 @@
 
         @keyframes scan-animation {
             0% {
-                top: 30%;
+                top: 20%; /* 调整扫描线的起始位置 */
             }
             100% {
-                top: 60%;
+                top: 80%; /* 调整扫描线的结束位置 */
             }
         }
 
@@ -181,10 +181,24 @@
             if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 navigator.mediaDevices.getUserMedia({
                     video: {
-                        facingMode: { exact: "environment" } // 强制使用后置摄像头
+                        facingMode: { ideal: "environment" } // 尝试使用后置摄像头，如果不可用则使用默认摄像头
                     }
                 })
                 .then(function(stream) {
+                    const videoTrack = stream.getVideoTracks()[0];
+                    const capabilities = videoTrack.getCapabilities();
+
+                    if (capabilities.zoom) {
+                        const minZoom = capabilities.zoom.min;
+                        videoTrack.applyConstraints({
+                            advanced: [{ zoom: minZoom }] // 设置焦距为最小值
+                        }).then(() => {
+                            console.log("最小焦距已应用");
+                        }).catch((error) => {
+                            console.error("应用最小焦距失败: ", error);
+                        });
+                    }
+
                     video.srcObject = stream;
                 })
                 .catch(function(error) {
