@@ -93,7 +93,7 @@
         }
     </style>
 </head>
-<body>
+<body onload="checkHTML">
     <div class="top">
         <div class="reservation-title">我的今日预约</div>
     </div>
@@ -156,7 +156,16 @@
         // 页面加载时更新时间
         window.onload = function() {
             updateTime();
-        }
+        };
+
+         function checkHTML() {
+            // Check if Page A has been visited
+            const PageVideo = sessionStorage.getItem('PageVideo');
+            if (PageVideo !== 'true') {
+                alert('对不起，您没有权限访问页面');
+                document.body.style.display = 'none';
+            } 
+        };
     </script>
 
 </body>
