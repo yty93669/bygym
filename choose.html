@@ -47,14 +47,14 @@
     </style>
 
  <script>
-        function setAccessFlag() {
+        function setHTML() {
             //必须按顺序访问
-            sessionStorage.setItem('visitedPageChoose', 'true');
+            sessionStorage.setItem('PageChoose', 'true');
         }
     </script>
     
 </head>
-<body>
+<body onload="setHTML()">
 
     <div class="scroll-container">
         <div class="image-container">
